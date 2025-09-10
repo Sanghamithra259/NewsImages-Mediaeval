@@ -1,0 +1,8 @@
+# Ignore generated files
+features/
+output/
+venv/
+__pycache__/
+*.pt
+*.npy
+*.txt
