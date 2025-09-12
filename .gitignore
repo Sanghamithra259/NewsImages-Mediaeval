@@ -1,8 +1,7 @@
 # Ignore generated files
 features/
 output/
+submission/
 venv/
 __pycache__/
-*.pt
-*.npy
-*.txt
+*.zip
