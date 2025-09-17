@@ -1,62 +1,83 @@
-NewsImages-MediaEval 2025 Submission
+# MediaEval 2025 NewsImages Retrieval Project
 
-Group Name: SyntaxError404
-Approach Name: Retrieval
+**Group Name:** SyntaxError404  
+**Task:** NewsImages 2025 – Image Retrieval for News Articles  
+**Description:** This project implements an image retrieval pipeline that recommends the most fitting news image for a given news article.
 
-Overview
+---
 
-This repository contains our submission for the NewsImages Challenge at MediaEval 2025. The goal of the challenge is to provide relevant image recommendations for a given news article. We implemented an image retrieval pipeline using CLIP-style embeddings and a learned projection.
+## Table of Contents
 
-The submission includes:
+- [Project Overview](#project-overview)  
+- [Dataset](#dataset)  
+- [Features](#features)  
+- [Setup](#setup)  
+- [Usage](#usage)  
+- [Submission](#submission)  
+- [Notes](#notes)  
 
-Retrieval results for the small subtask (30 articles)
+---
 
-Retrieval results for the large subtask (all 8,501 articles)
+## Project Overview
 
-Scripts used to generate embeddings, train the projection, and create the final submission images
+This project implements a pipeline for the **NewsImages 2025 challenge**. The pipeline consists of:
 
-mediaeval-project/
-│
-├─ data/                       # Dataset (CSV files and original images)
-│   ├─ newsarticles.csv
-│   ├─ subset.csv
-│   └─ newsimages/             # Original JPG images
-│
-├─ features/                   # Generated embeddings and trained projection
-│   ├─ text_embeds.npy
-│   ├─ text_ids.npy
-│   ├─ image_embeds.npy
-│   ├─ image_ids.npy
-│   └─ projection_ckpt.pt
-│
-├─ output/                     # (Optional) intermediate outputs
-│   └─ retrieved_images/
-│
-├─ submission/                 # Final images for submission (PNG)
-│   ├─ RET_Retrieval_SMALL/
-│   └─ RET_Retrieval_LARGE/
-│
-├─ generate_submission.py      # Script to convert retrieved images to PNGs
-├─ run_retrieval.py            # Script to perform retrieval
-├─ dataset.py                  # Dataset loading & embedding generation
-├─ requirements.txt            # Python dependencies
-└─ utils/
-    ├─ config.py
-    └─ other utility files
+1. **Text embedding generation** (`text_encoder.py`)  
+2. **Image embedding generation** (`image_encoder.py`)  
+3. **Retrieval pipeline** (`run_retrieval.py`)  
 
-Submission Format
+The retrieval pipeline computes similarities between text and image embeddings and generates **submission-ready PNGs** for both **SMALL (30 articles)** and **LARGE (all articles)** subtasks.
 
-File naming convention: [articleID]_[GroupName]_[ApproachName].png
-Example: 117_SyntaxError404_Retrieval.png
+---
 
-Image size: 460x260 pixels (landscape)
+## Dataset
 
-Approach naming: RET_Retrieval_SMALL and RET_Retrieval_LARGE
+- **News articles CSV:** `data/newsarticles.csv`  
+- **News images:** `data/newsimages/` folder with `.jpg` files  
+- **Embeddings:** Stored in `features/` after running encoders  
 
-Notes
+> Note: Large datasets, embeddings, and outputs are **not included in this repo**.  
 
-Only one image per article ID is provided.
+---
 
-The code is modular: you can replace the retrieval pipeline with a generative approach (GEN) if needed.
+## Features
 
-Original images are included in data/newsimages/ but are not part of the submission.
+- **Text embeddings:** `features/text_embeds.npy`, `features/text_ids.npy`  
+- **Image embeddings:** `features/image_embeds.npy`, `features/image_ids.npy`  
+- **Submission images:** Generated in `submission/`  
+
+- PNGs are **460×260 pixels** and named as `[articleID]_[GroupName]_[ApproachName].png`  
+- Approach names: `RET_Retrieval_SMALL` and `RET_Retrieval_LARGE`  
+
+---
+
+## Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/mediaeval-newsimages.git
+cd mediaeval-newsimages
+
+file structure :
+
+mediaeval_project/
+├── data/
+│   ├── newsarticles.csv
+│   └── newsimages/           # All JPG images
+├── features/
+│   ├── image_embeds.npy
+│   ├── image_ids.npy
+│   ├── text_embeds.npy
+│   └── text_ids.npy
+├── submission/
+│   ├── RET_Retrieval_SMALL/
+│   └── RET_Retrieval_LARGE/
+├── retrieval/
+│   ├── preprocess.py
+│   ├── image_encoder.py        # generates image embeddings
+│   ├── text_encoder.py         # generates text embeddings
+│   ├── run_retrieval.py
+│   └── utils.py            
+├── requirements.txt
+└── README.md
