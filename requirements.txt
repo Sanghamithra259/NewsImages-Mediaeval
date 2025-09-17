@@ -1,5 +1,8 @@
-torch>=2.1.0
-transformers>=4.40.0
-pillow
+torch
+numpy
 pandas
+Pillow
 tqdm
+ftfy
+regex
+transformers

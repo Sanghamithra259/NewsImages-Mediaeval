@@ -1,7 +1,18 @@
-# Ignore generated files
-features/
-output/
-submission/
-venv/
+# Python
 __pycache__/
-*.zip
+*.pyc
+*.pyo
+*.pyd
+venv/
+
+# Data / features
+data/
+features/
+submission/
+*.npy
+*.pt
+*.safetensors
+*.bin
+
+# Logs
+*.log
